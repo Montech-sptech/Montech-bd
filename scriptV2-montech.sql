@@ -34,7 +34,11 @@ CREATE TABLE cargo (
     idCargo INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL UNIQUE,
     descricao VARCHAR(250),
-    statusAtividade BOOLEAN NOT NULL DEFAULT TRUE
+    statusAtividade BOOLEAN NOT NULL DEFAULT TRUE,
+    fkEmpresa INT NOT NULL,
+    
+	CONSTRAINT fk_cargo_empresa
+        FOREIGN KEY (fkEmpresa) REFERENCES empresa(idEmpresa)
 );
 
 CREATE TABLE permissao (
