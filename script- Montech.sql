@@ -74,6 +74,7 @@ CREATE TABLE usuario (
   idUsuario INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(100) NOT NULL,
   email VARCHAR(200) NOT NULL,
+  senha VARCHAR(50) NOT NULL,
   cpf CHAR(11) NOT NULL,
   telefone VARCHAR(20),
   statusAtividade TINYINT NOT NULL DEFAULT 1,
