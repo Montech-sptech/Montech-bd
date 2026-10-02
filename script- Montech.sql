@@ -238,37 +238,36 @@ INSERT INTO servidor (token, nomeServidor, hostname, sistemaOperacional, interva
 INSERT INTO servidorcomponente (fkServidor, fkComponente, limiteAtencao, limiteCritico) VALUES
 -- Servidor 1 (SDV-GRU-01): todos os 11 componentes
 (1, 1,  70.00,  90.00),   -- Uso de CPU (Geral)
-(1, 2,  NULL,   NULL),    -- Uso de CPU (Por Core)
-(1, 3,  75.00,  90.00),   -- Uso de RAM
-(1, 4,  NULL,   NULL),    -- Swap In
-(1, 5,  NULL,   NULL),    -- Swap Out
-(1, 6,  80.00,  95.00),   -- Uso de Disco
-(1, 7,  NULL,   NULL),    -- Leitura de Disco
-(1, 8,  NULL,   NULL),    -- Escrita de Disco
-(1, 9,  NULL,   NULL),    -- Rede - Bytes Enviados
-(1, 10, NULL,   NULL),    -- Rede - Bytes Recebidos
-(1, 11, 300.00, 500.00),  -- Processos Ativos
+(1, 2,  75.00,  90.00),   -- Uso de RAM
+(1, 3,  NULL,   NULL),    -- Swap In
+(1, 4,  NULL,   NULL),    -- Swap Out
+(1, 5,  80.00,  95.00),   -- Uso de Disco
+(1, 6,  NULL,   NULL),    -- Leitura de Disco
+(1, 7,  NULL,   NULL),    -- Escrita de Disco
+(1, 8,  NULL,   NULL),    -- Rede - Bytes Enviados
+(1, 9, NULL,   NULL),    -- Rede - Bytes Recebidos
+(1, 10, 300.00, 500.00),  -- Processos Ativos
  
 -- Servidor 2 (SPA-GRU-01): RAM, disco e rede recebida
-(2, 3,  80.00,  92.00),   -- Uso de RAM
-(2, 6,  80.00,  95.00),   -- Uso de Disco
-(2, 7,  NULL,   NULL),    -- Leitura de Disco
-(2, 8,  NULL,   NULL),    -- Escrita de Disco
-(2, 10, NULL,   NULL),    -- Rede - Bytes Recebidos
+(2, 2,  80.00,  92.00),   -- Uso de RAM
+(2, 5,  80.00,  95.00),   -- Uso de Disco
+(2, 6,  NULL,   NULL),    -- Leitura de Disco
+(2, 7,  NULL,   NULL),    -- Escrita de Disco
+(2, 9, NULL,   NULL),    -- Rede - Bytes Recebidos
  
 -- Servidor 3 (AIS-CGH-01): RAM, disco e rede
-(3, 3,  80.00,  92.00),   -- Uso de RAM
-(3, 6,  80.00,  95.00),   -- Uso de Disco
-(3, 7,  NULL,   NULL),    -- Leitura de Disco
-(3, 8,  NULL,   NULL),    -- Escrita de Disco
-(3, 9,  NULL,   NULL),    -- Rede - Bytes Enviados
-(3, 10, NULL,   NULL),    -- Rede - Bytes Recebidos
+(3, 2,  80.00,  92.00),   -- Uso de RAM
+(3, 5,  80.00,  95.00),   -- Uso de Disco
+(3, 6,  NULL,   NULL),    -- Leitura de Disco
+(3, 7,  NULL,   NULL),    -- Escrita de Disco
+(3, 8,  NULL,   NULL),    -- Rede - Bytes Enviados
+(3, 9, NULL,   NULL),    -- Rede - Bytes Recebidos
  
 -- Servidor 4 (SPA-VCP-01): RAM e disco
-(4, 3,  80.00,  92.00),   -- Uso de RAM
-(4, 6,  85.00,  95.00),   -- Uso de Disco
-(4, 7,  NULL,   NULL),    -- Leitura de Disco
-(4, 8,  NULL,   NULL);    -- Escrita de Disco
+(4, 2,  80.00,  92.00),   -- Uso de RAM
+(4, 5,  85.00,  95.00),   -- Uso de Disco
+(4, 6,  NULL,   NULL),    -- Leitura de Disco
+(4, 7,  NULL,   NULL);    -- Escrita de Disco
  
 -- ------------------------------------------------------------
 -- VISUALIZACAO -> (fkUsuario, fkServidor, dataInicioAcesso, dataFimAcesso)
