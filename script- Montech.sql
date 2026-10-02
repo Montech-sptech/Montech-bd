@@ -210,7 +210,7 @@ INSERT INTO usuario (nome, email, senha, cpf, telefone, statusAtividade, fkCargo
 -- ------------------------------------------------------------
 INSERT INTO componente (nomeComponente, unidadeMedida, codigo, nomeCodigo) VALUES
 ('Uso de CPU (Geral)',     '%',         'psutil.cpu_percent(interval=1)',                                  'UsoCPU_Geral'),          -- 1
-('Uso de CPU (Por Core)',  '%',         'psutil.cpu_percent(percpu=True)',                                 'UsoCPU_Por_Core'),       -- 2
+-- ('Uso de CPU (Por Core)',  '%',         'psutil.cpu_percent(percpu=True)',                                 'UsoCPU_Por_Core'),       -- 2
 ('Uso de RAM',             '%',         'psutil.virtual_memory().percent',                                 'UsoRAM'),                -- 3
 ('Swap In',                'bytes',     'psutil.swap_memory().sin',                                        'Swap_In'),               -- 4
 ('Swap Out',               'bytes',     'psutil.swap_memory().sout',                                       'Swap_Out'),              -- 5
