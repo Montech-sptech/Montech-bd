@@ -60,13 +60,12 @@ CREATE TABLE servidor (
   idServidor INT NOT NULL AUTO_INCREMENT,
   token VARCHAR(32) NOT NULL,
   nomeServidor VARCHAR(100) NOT NULL,
-  hostname VARCHAR(100) NOT NULL,
-  sistemaOperacional VARCHAR(100),
+  sistemaOperacional VARCHAR(100) NOT NULL,
   intervaloColeta INT DEFAULT NULL,
-  statusAtividade TINYINT NOT NULL DEFAULT 1,
+  statusAtividade TINYINT NOT NULL DEFAULT 0,
   fkAeroporto INT NOT NULL,
   PRIMARY KEY (idServidor),
-  UNIQUE KEY uq_servidor_aeroporto_nome (fkAeroporto, nomeServidor),
+  UNIQUE KEY uq_servidor_aeroporto (fkAeroporto),
   CONSTRAINT fk_servidor_aeroporto FOREIGN KEY (fkAeroporto)
     REFERENCES aeroporto (idAeroporto),
   CONSTRAINT ck_servidor_intervalo
