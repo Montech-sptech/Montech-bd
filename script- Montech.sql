@@ -174,20 +174,20 @@ INSERT INTO permissao (nome, descricao) VALUES
 ('GERENCIAR_SERVIDORES', 'Permite cadastrar, editar e desativar servidores'),           -- 2
 ('GERENCIAR_USUARIOS',   'Permite cadastrar, editar e desativar usuários'),             -- 3
 ('CONFIGURAR_LIMITES',   'Permite definir os limites de atenção e crítico dos componentes'),  -- 4
-('EXPORTAR_RELATORIOS',  'Permite gerar e exportar relatórios de desempenho');          -- 5
- 
+('EXPORTAR_RELATORIOS',  'Permite gerar e exportar relatórios de desempenho'),          -- 5
+('VISUALIZAR_DASHBOARD_GESTOR', 'Permite visualizar o painel gerencial');               -- 6 
 -- ------------------------------------------------------------
 -- CARGOPERMISSAO -> (fkCargo, fkPermissao)
 -- ------------------------------------------------------------
 INSERT INTO cargopermissao (fkCargo, fkPermissao) VALUES
 -- Administrador: tudo
-(1, 1), (1, 2), (1, 3), (1, 4), (1, 5),
+(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6)
 -- Analista de Infraestrutura: dashboard, servidores, limites, relatórios
 (2, 1), (2, 2), (2, 4), (2, 5),
 -- Operador de Monitoramento: só dashboard
 (3, 1),
 -- Gerente de TI: dashboard, usuários, limites, relatórios
-(4, 1), (4, 3), (4, 4), (4, 5),
+(4, 1), (4, 3), (4, 4), (4, 5), (4, 6)
 -- Técnico de Campo: dashboard e servidores
 (5, 1), (5, 2);
  
