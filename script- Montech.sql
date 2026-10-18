@@ -58,7 +58,7 @@ CREATE TABLE componente (
 
 CREATE TABLE servidor (
   idServidor INT NOT NULL AUTO_INCREMENT,
-  token VARCHAR(32) NOT NULL,
+  token VARCHAR(32) UNIQUE NOT NULL,
   nomeServidor VARCHAR(100) NOT NULL,
   sistemaOperacional VARCHAR(100) NOT NULL,
   intervaloColeta INT DEFAULT NULL,
@@ -207,12 +207,12 @@ INSERT INTO usuario (nome, email, senha, cpf, telefone, statusAtividade, fkCargo
 -- "nomeCodigo" = nome da coluna no CSV
 -- ------------------------------------------------------------
 INSERT INTO componente (nomeComponente, unidadeMedida, codigo, nomeCodigo) VALUES
-('Uso de CPU (Geral)',     '%',         'psutil.cpu_percent(interval=1)',                                  'UsoCPU_Geral'),          -- 1
--- ('Uso de CPU (Por Core)',  '%',         'psutil.cpu_percent(percpu=True)',                                 'UsoCPU_Por_Core'),       -- 2
-('Uso de RAM',             '%',         'psutil.virtual_memory().percent',                                 'UsoRAM'),                -- 3
+('Uso de CPU (Geral)',     'porcentagem',         'psutil.cpu_percent(interval=1)',                                  'UsoCPU_Geral'),          -- 1
+-- ('Uso de CPU (Por Core)',  'porcentagem',         'psutil.cpu_percent(percpu=True)',                                 'UsoCPU_Por_Core'),       -- 2
+('Uso de RAM',             'porcentagem',         'psutil.virtual_memory().percent',                                 'UsoRAM'),                -- 3
 ('Swap In',                'bytes',     'psutil.swap_memory().sin',                                        'Swap_In'),               -- 4
 ('Swap Out',               'bytes',     'psutil.swap_memory().sout',                                       'Swap_Out'),              -- 5
-('Uso de Disco',           '%',         'psutil.disk_usage("C:\\\\" if os.name == "nt" else "/").percent', 'UsoDisco'),              -- 6
+('Uso de Disco',           'porcentagem',         'psutil.disk_usage("C:\\\\" if os.name == "nt" else "/").percent', 'UsoDisco'),              -- 6
 ('Leitura de Disco',       'bytes',     'psutil.disk_io_counters().read_bytes',                            'Disco_Read_Bytes'),      -- 7
 ('Escrita de Disco',       'bytes',     'psutil.disk_io_counters().write_bytes',                           'Disco_Write_Bytes'),     -- 8
 ('Rede - Bytes Enviados',  'bytes',     'psutil.net_io_counters().bytes_sent',                             'Rede_Bytes_Enviados'),   -- 9
