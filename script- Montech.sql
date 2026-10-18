@@ -65,7 +65,6 @@ CREATE TABLE servidor (
   statusAtividade TINYINT NOT NULL DEFAULT 0,
   fkAeroporto INT NOT NULL,
   PRIMARY KEY (idServidor),
-  UNIQUE KEY uq_servidor_aeroporto (fkAeroporto),
   CONSTRAINT fk_servidor_aeroporto FOREIGN KEY (fkAeroporto)
     REFERENCES aeroporto (idAeroporto),
   CONSTRAINT ck_servidor_intervalo
@@ -105,7 +104,7 @@ CREATE TABLE servidorcomponente (
   CONSTRAINT fk_servidorcomponente_componente FOREIGN KEY (fkComponente)
     REFERENCES componente (idComponente),
   CONSTRAINT ck_servidorcomponente_limites CHECK (
-    limiteAtencao IS NULL OR limiteCritico IS NULL
+    limiteAtencao IS NOT NULL OR limiteCritico IS NOT NULL
     OR limiteAtencao <= limiteCritico
   )
 );
@@ -224,11 +223,11 @@ INSERT INTO componente (nomeComponente, unidadeMedida, codigo, nomeCodigo) VALUE
 -- SERVIDOR (ids 1 a 4) -> fkAeroporto
 -- token com exatamente 32 caracteres; intervaloColeta em segundos (NULL = padrão)
 -- ------------------------------------------------------------
-INSERT INTO servidor (token, nomeServidor, hostname, sistemaOperacional, intervaloColeta, statusAtividade, fkAeroporto) VALUES
-('3b12f1df-5232-4df4-8d48-64a938c2', 'SDV-GRU-01', 'sdv-gru-01.montech.local', 'Ubuntu 22.04 LTS',    3,    1, 1),  -- 1 GRU (servidor de teste)
-('5d2e8b7a1c4f4963b0a7e21f9c6d3a85', 'SPA-GRU-01', 'spa-gru-01.montech.local', 'Windows Server 2022', 5,    1, 1),  -- 2 GRU
-('9b7c3e5f2a1d48c6847f0e3b6a2d1c90', 'AIS-CGH-01', 'ais-cgh-01.montech.local', 'Debian 12',           10,   1, 2),  -- 3 CGH
-('c4e1a7b92d3f45068e9a1b7c5d3f2e64', 'SPA-VCP-01', 'spa-vcp-01.montech.local', 'Ubuntu 24.04 LTS',    NULL, 1, 3);  -- 4 VCP
+INSERT INTO servidor (token, nomeServidor, sistemaOperacional, intervaloColeta, statusAtividade, fkAeroporto) VALUES
+('3b12f1df-5232-4df4-8d48-64a938c2', 'SDV-GRU-01', 'linux', 3, 1, 1),  -- 1 GRU (servidor de teste)
+('5d2e8b7a1c4f4963b0a7e21f9c6d3a85', 'SPA-GRU-01', 'windows', 5, 1, 1),  -- 2 GRU
+('9b7c3e5f2a1d48c6847f0e3b6a2d1c90', 'AIS-CGH-01', 'windows', 10, 1, 2),  -- 3 CGH
+('c4e1a7b92d3f45068e9a1b7c5d3f2e64', 'SPA-VCP-01', 'linux', 5, 1, 3);  -- 4 VCP
  
 -- ------------------------------------------------------------
 -- SERVIDORCOMPONENTE -> (fkServidor, fkComponente, limiteAtencao, limiteCritico)
