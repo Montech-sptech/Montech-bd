@@ -19,6 +19,9 @@ CREATE TABLE aeroporto (
   nome VARCHAR(100) NOT NULL,
   codigoAeroporto VARCHAR(10) NOT NULL,
   statusAtividade TINYINT NOT NULL DEFAULT 1,
+  urlJira VARCHAR(255) NOT NULL,
+  emailJira VARCHAR(255) NOT NULL,
+  tokenJira VARCHAR(255) NOT NULL,
   fkEmpresa INT NOT NULL,
   PRIMARY KEY (idAeroporto),
   UNIQUE KEY uq_aeroporto_empresa_codigo (fkEmpresa, codigoAeroporto),
@@ -149,11 +152,11 @@ INSERT INTO empresa (razaoSocial, cnpj, email, cep, numero, statusAtividade) VAL
 -- ------------------------------------------------------------
 -- AEROPORTO (ids 1 a 3) -> fkEmpresa
 -- ------------------------------------------------------------
-INSERT INTO aeroporto (nome, codigoAeroporto, statusAtividade, fkEmpresa) VALUES
-('Aeroporto Internacional de Guarulhos', 'GRU', 1, 1),  -- 1 (Aeroportos Paulistas)
-('Aeroporto de Congonhas',               'CGH', 1, 1),  -- 2 (Aeroportos Paulistas)
-('Aeroporto Internacional de Viracopos', 'VCP', 1, 2);  -- 3 (Campinas Aero)
- 
+INSERT INTO aeroporto (nome, codigoAeroporto, statusAtividade, urlJira, emailJira, tokenJira, fkEmpresa) VALUES
+('Aeroporto Internacional de Guarulhos', 'GRU', 1, "https://montechsd.atlassian.net", "botmontech@protonmail.com", "ATATT3xFfGF0MWo_zxNbNrvWLE8wpvRB55h4rCyyNi6sECykHLR_yjItk9siiVcZ8iKrBWsWx21-UlRgeKEDexxvERCGRC7nKLfky_i-rvl9kL0DBDS1EIQ5bBoVTHMvksNY_uoZ9_YRkBBe_y_cyPe_HRPlsGTpK8VmSBM49qJCK3zbi3zwxSY=0F6A4BB3" ,1),  -- 1 (Aeroportos Paulistas)
+('Aeroporto de Congonhas',               'CGH', 1, "https://montechsd.atlassian.net", "botmontech@protonmail.com", "ATATT3xFfGF0MWo_zxNbNrvWLE8wpvRB55h4rCyyNi6sECykHLR_yjItk9siiVcZ8iKrBWsWx21-UlRgeKEDexxvERCGRC7nKLfky_i-rvl9kL0DBDS1EIQ5bBoVTHMvksNY_uoZ9_YRkBBe_y_cyPe_HRPlsGTpK8VmSBM49qJCK3zbi3zwxSY=0F6A4BB3" ,1),  -- 2 (Aeroportos Paulistas)
+('Aeroporto Internacional de Viracopos', 'VCP', 1, "https://montechsd.atlassian.net", "botmontech@protonmail.com", "ATATT3xFfGF0MWo_zxNbNrvWLE8wpvRB55h4rCyyNi6sECykHLR_yjItk9siiVcZ8iKrBWsWx21-UlRgeKEDexxvERCGRC7nKLfky_i-rvl9kL0DBDS1EIQ5bBoVTHMvksNY_uoZ9_YRkBBe_y_cyPe_HRPlsGTpK8VmSBM49qJCK3zbi3zwxSY=0F6A4BB3" ,2);  -- 3 (Campinas Aero)
+
 -- ------------------------------------------------------------
 -- CARGO (ids 1 a 5) -> empresa_idEmpresa
 -- ------------------------------------------------------------
