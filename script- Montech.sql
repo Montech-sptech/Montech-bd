@@ -74,6 +74,7 @@ CREATE TABLE servidor (
     CHECK (intervaloColeta IS NULL OR intervaloColeta > 0)
 );
 
+
 CREATE TABLE usuario (
   idUsuario INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(100) NOT NULL,
@@ -110,6 +111,30 @@ CREATE TABLE servidorcomponente (
     limiteAtencao IS NOT NULL OR limiteCritico IS NOT NULL
     OR limiteAtencao <= limiteCritico
   )
+);
+
+CREATE TABLE chamado (
+  idChamado INT NOT NULL AUTO_INCREMENT,
+  titulo VARCHAR(200) NOT NULL,
+  descricao VARCHAR(255) NOT NULL,
+  statusChamado ENUM('ABERTO', 'ATENCAO', 'CRITICO', 'FECHADO') NOT NULL DEFAULT 'ABERTO',
+  dt_inicio DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  dt_fim DATETIME,
+  fkServidor INT NOT NULL,
+  PRIMARY KEY (idChamado, fkServidor),
+  CONSTRAINT ck_chamado_datas CHECK (
+    dt_fim IS NULL OR dt_fim >= dt_inicio
+  )
+);
+
+CREATE TABLE servidorComponenteChamado (
+  fkServidorComponente INT NOT NULL,
+  fkChamado INT NOT NULL,
+  PRIMARY KEY (fkServidorComponente, fkChamado),
+  CONSTRAINT fk_servidorcomponentechamado_servidorcomponente FOREIGN KEY (fkServidorComponente)
+    REFERENCES servidorcomponente (idServidorComponente),
+  CONSTRAINT fk_servidorcomponentechamado_chamado FOREIGN KEY (fkChamado)
+    REFERENCES chamado (idChamado)
 );
 
 CREATE TABLE cargopermissao (
