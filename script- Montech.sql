@@ -118,24 +118,18 @@ CREATE TABLE chamado (
   titulo VARCHAR(200) NOT NULL,
   descricao VARCHAR(255) NOT NULL,
   statusChamado ENUM('ABERTO', 'ATENCAO', 'CRITICO', 'FECHADO') NOT NULL DEFAULT 'ABERTO',
+  linkJira VARCHAR(500) NOT NULL,
   dt_inicio DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   dt_fim DATETIME,
-  fkServidor INT NOT NULL,
-  PRIMARY KEY (idChamado, fkServidor),
+  fkServidorComponente INT NOT NULL,
+  PRIMARY KEY (idChamado, fkServidorComponente),
+  CONSTRAINT fk_chamado_servidorcomponente FOREIGN KEY (fkServidorComponente)
+    REFERENCES servidorcomponente (idServidorComponente),
   CONSTRAINT ck_chamado_datas CHECK (
     dt_fim IS NULL OR dt_fim >= dt_inicio
   )
 );
 
-CREATE TABLE servidorComponenteChamado (
-  fkServidorComponente INT NOT NULL,
-  fkChamado INT NOT NULL,
-  PRIMARY KEY (fkServidorComponente, fkChamado),
-  CONSTRAINT fk_servidorcomponentechamado_servidorcomponente FOREIGN KEY (fkServidorComponente)
-    REFERENCES servidorcomponente (idServidorComponente),
-  CONSTRAINT fk_servidorcomponentechamado_chamado FOREIGN KEY (fkChamado)
-    REFERENCES chamado (idChamado)
-);
 
 CREATE TABLE cargopermissao (
   idCargoPermissao INT NOT NULL AUTO_INCREMENT,
