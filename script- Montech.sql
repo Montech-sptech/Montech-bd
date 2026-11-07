@@ -217,11 +217,11 @@ INSERT INTO cargopermissao (fkCargo, fkPermissao) VALUES
 -- Cargo e aeroporto sempre da mesma empresa.
 -- ------------------------------------------------------------
 INSERT INTO usuario (nome, email, senha, cpf, telefone, statusAtividade, fkCargo, fkAeroporto) VALUES
-('Carlos Silva',      'carlos.silva@aeroportospaulistas.com.br',  'Admin@123',    '11144477735', '11987654321', 1, 1, 1),  -- 1 Administrador / GRU
-('Mariana Souza',     'mariana.souza@aeroportospaulistas.com.br', 'Analista@123', '52998224725', '11976543210', 1, 2, 1),  -- 2 Analista / GRU
-('Rafael Lima',       'rafael.lima@aeroportospaulistas.com.br',   'Operador@123', '39053344705', '11965432109', 1, 3, 2),  -- 3 Operador / CGH
-('Fernanda Oliveira', 'fernanda.oliveira@campinasaero.com.br',    'Gerente@123',  '16899535009', '19987654321', 1, 4, 3),  -- 4 Gerente de TI / VCP
-('João Pereira',      'joao.pereira@campinasaero.com.br',         'Tecnico@123',  '71428793860', '19976543210', 1, 5, 3);  -- 5 Técnico de Campo / VCP
+('Carlos Silva',      'carlos.silva@aeroportospaulistas.com.br',  'Admin@123',    '11144477735', '11987654321', 1, 1, 1),
+('Mariana Souza',     'mariana.souza@aeroportospaulistas.com.br', 'Analista@123', '52998224725', '11976543210', 1, 2, 1),
+('Rafael Lima',       'rafael.lima@aeroportospaulistas.com.br',   'Operador@123', '39053344705', '11965432109', 1, 3, 2),
+('Fernanda Oliveira', 'fernanda.oliveira@campinasaero.com.br',    'Gerente@123',  '16899535009', '19987654321', 1, 4, 3),
+('João Pereira',      'joao.pereira@campinasaero.com.br',         'Tecnico@123',  '71428793860', '19976543210', 1, 5, 3);
  
 -- ------------------------------------------------------------
 -- COMPONENTE (ids 1 a 11)
@@ -229,17 +229,19 @@ INSERT INTO usuario (nome, email, senha, cpf, telefone, statusAtividade, fkCargo
 -- "nomeCodigo" = nome da coluna no CSV
 -- ------------------------------------------------------------
 INSERT INTO componente (nomeComponente, unidadeMedida, codigo, nomeCodigo) VALUES
-('Uso de CPU (Geral)',     'porcentagem',         'psutil.cpu_percent(interval=1)',                                  'UsoCPU_Geral'),          -- 1
--- ('Uso de CPU (Por Core)',  'porcentagem',         'psutil.cpu_percent(percpu=True)',                                 'UsoCPU_Por_Core'),       -- 2
-('Uso de RAM',             'porcentagem',         'psutil.virtual_memory().percent',                                 'UsoRAM'),                -- 3
-('Swap In',                'bytes',     'psutil.swap_memory().sin',                                        'Swap_In'),               -- 4
-('Swap Out',               'bytes',     'psutil.swap_memory().sout',                                       'Swap_Out'),              -- 5
-('Uso de Disco',           'porcentagem',         'psutil.disk_usage("C:\\\\" if os.name == "nt" else "/").percent', 'UsoDisco'),              -- 6
-('Leitura de Disco',       'bytes',     'psutil.disk_io_counters().read_bytes',                            'Disco_Read_Bytes'),      -- 7
-('Escrita de Disco',       'bytes',     'psutil.disk_io_counters().write_bytes',                           'Disco_Write_Bytes'),     -- 8
-('Rede - Bytes Enviados',  'bytes',     'psutil.net_io_counters().bytes_sent',                             'Rede_Bytes_Enviados'),   -- 9
-('Rede - Bytes Recebidos', 'bytes',     'psutil.net_io_counters().bytes_recv',                             'Rede_Bytes_Recebidos'),  -- 10
-('Processos Ativos',       'processos', 'len(psutil.pids())',                                              'Qtd_Processos');         -- 11
+('Uso de CPU (Geral)', 'porcentagem', 'psutil.cpu_percent(interval=1)', 'UsoCPU_Geral'),
+('Uso de RAM', 'porcentagem', 'psutil.virtual_memory().percent', 'UsoRAM'),
+('Swap In', 'bytes', 'psutil.swap_memory().sin', 'Swap_In'),
+('Swap Out', 'bytes', 'psutil.swap_memory().sout', 'Swap_Out'),
+('Uso de Disco', 'porcentagem', 'psutil.disk_usage("C:\\\\" if os.name == "nt" else "/").percent', 'UsoDisco'),
+('Leitura de Disco', 'bytes', 'psutil.disk_io_counters().read_bytes', 'Disco_Read_Bytes'),
+('Escrita de Disco', 'bytes', 'psutil.disk_io_counters().write_bytes', 'Disco_Write_Bytes'),
+('Rede - Bytes Enviados', 'bytes', 'psutil.net_io_counters().bytes_sent', 'Rede_Bytes_Enviados'),
+('Rede - Bytes Recebidos', 'bytes', 'psutil.net_io_counters().bytes_recv', 'Rede_Bytes_Recebidos'),
+('Rede - Pacotes Enviados', 'pacotes', 'psutil.net_io_counters().packets_sent', 'Rede_Pacotes_Enviados'),
+('Rede - Pacotes Recebidos', 'pacotes', 'psutil.net_io_counters().packets_recv', 'Rede_Pacotes_Recebidos'),
+('Temperatura da CPU', 'celsius', 'psutil.sensors_temperatures()', 'Temperatura_CPU'),
+('Processos Ativos', 'processos', 'len(psutil.pids())', 'Qtd_Processos');
  
 -- ------------------------------------------------------------
 -- SERVIDOR (ids 1 a 4) -> fkAeroporto
@@ -247,9 +249,10 @@ INSERT INTO componente (nomeComponente, unidadeMedida, codigo, nomeCodigo) VALUE
 -- ------------------------------------------------------------
 INSERT INTO servidor (token, nomeServidor, sistemaOperacional, intervaloColeta, statusAtividade, fkAeroporto) VALUES
 ('3b12f1df-5232-4df4-8d48-64a938c2', 'SDV-GRU-01', 'linux', 3, 1, 1),  -- 1 GRU (servidor de teste)
-('5d2e8b7a1c4f4963b0a7e21f9c6d3a85', 'SPA-GRU-01', 'windows', 5, 1, 1),  -- 2 GRU
-('9b7c3e5f2a1d48c6847f0e3b6a2d1c90', 'AIS-CGH-01', 'windows', 10, 1, 2),  -- 3 CGH
-('c4e1a7b92d3f45068e9a1b7c5d3f2e64', 'SPA-VCP-01', 'linux', 5, 1, 3);  -- 4 VCP
+('5d2e8b7a1c4f4963b0a7e21f9c6d3a85', 'SPA-GRU-01', 'windows', 3, 1, 1),  -- 2 GRU
+('9b7c3e5f2a1d48c6847f0e3b6a2d1c90', 'AIS-CGH-01', 'windows', 3, 1, 2),  -- 3 CGH
+('c4e1a7b92d3f45068e9a1b7c5d3f2e64', 'SPA-VCP-01', 'linux', 3, 1, 3),  -- 4 VCP
+('a7f3c9e21b5d4680a2c7f1e9b6d3a485', 'SDV-GRU-02', 'linux', 3, 1, 1); -- 5 TUDO
  
 -- ------------------------------------------------------------
 -- SERVIDORCOMPONENTE -> (fkServidor, fkComponente, limiteAtencao, limiteCritico)
@@ -287,7 +290,22 @@ INSERT INTO servidorcomponente (fkServidor, fkComponente, limiteAtencao, limiteC
 (4, 2,  80.00,  92.00),   -- Uso de RAM
 (4, 5,  85.00,  95.00),   -- Uso de Disco
 (4, 6,  80.00,   90.00),    -- Leitura de Disco
-(4, 7,  80.00,   90.00);    -- Escrita de Disco
+(4, 7,  80.00,   90.00),    -- Escrita de Disco
+
+-- Servidor 5 (SDV-GRU-02): todos os 11 componentes
+(5, 1,  70.00,  90.00),   -- Uso de CPU (Geral)
+(5, 2,  75.00,  90.00),   -- Uso de RAM
+(5, 3,  0.00,   0.00),    -- Swap In
+(5, 4,  0.00,   0.00),    -- Swap Out
+(5, 5,  80.00,  95.00),   -- Uso de Disco
+(5, 6,  0.00,   0.00),    -- Leitura de Disco
+(5, 7,  0.00,   0.00),    -- Escrita de Disco
+(5, 8,  0.00,   0.00),    -- Rede - Bytes Enviados
+(5, 9,  0.00,   0.00),    -- Rede - Bytes Recebidos
+(5, 10, 0.00,   0.00),    -- Rede - Pacotes Enviados
+(5, 11, 0.00,   0.00),    -- Rede - Pacotes Recebidos
+(5, 12, 70.00,  85.00),   -- Temperatura da CPU
+(5, 13, 300.00, 500.00);  -- Processos Ativos
  
 -- ------------------------------------------------------------
 -- VISUALIZACAO -> (fkUsuario, fkServidor, dataInicioAcesso, dataFimAcesso)
