@@ -53,7 +53,7 @@ CREATE TABLE componente (
   idComponente INT NOT NULL AUTO_INCREMENT,
   nomeComponente VARCHAR(100) NOT NULL,
   unidadeMedida VARCHAR(30) NOT NULL,
-  codigo VARCHAR(100) NOT NULL,
+  codigo VARCHAR(255) NOT NULL,
   nomeCodigo VARCHAR(50) NOT NULL,
   PRIMARY KEY (idComponente),
   UNIQUE KEY uq_componente_nome (nomeComponente)
@@ -241,8 +241,15 @@ INSERT INTO componente (nomeComponente, unidadeMedida, codigo, nomeCodigo) VALUE
 ('Rede - Pacotes Enviados', 'pacotes', 'psutil.net_io_counters().packets_sent', 'Rede_Pacotes_Enviados'),
 ('Rede - Pacotes Recebidos', 'pacotes', 'psutil.net_io_counters().packets_recv', 'Rede_Pacotes_Recebidos'),
 ('Temperatura da CPU', 'celsius', 'psutil.sensors_temperatures()', 'Temperatura_CPU'),
-('Processos Ativos', 'processos', 'len(psutil.pids())', 'Qtd_Processos');
- 
+('Processos Ativos', 'processos', 'len(psutil.pids())', 'Qtd_Processos'),
+
+
+-- Adicionais para predição (apenas os usados no script R)
+('RAM - Livre', 'bytes', 'psutil.virtual_memory().free', 'RAM_Livre'),
+('Troca de Contexto da CPU', 'contagem', 'psutil.cpu_stats().ctx_switches', 'CPU_Ctx_Switches'),
+('Interrupções da CPU', 'contagem', 'psutil.cpu_stats().interrupts', 'CPU_Interrupts'),
+('Chamadas de Sistema', 'contagem', 'psutil.cpu_stats().syscalls', 'CPU_Syscalls'),
+('Disco - Operações de Escrita', 'contagem', 'psutil.disk_io_counters().write_count', 'Disco_Write_Count');
 -- ------------------------------------------------------------
 -- SERVIDOR (ids 1 a 4) -> fkAeroporto
 -- token com exatamente 32 caracteres; intervaloColeta em segundos (NULL = padrão)
@@ -305,7 +312,14 @@ INSERT INTO servidorcomponente (fkServidor, fkComponente, limiteAtencao, limiteC
 (5, 10, 0.00,   0.00),    -- Rede - Pacotes Enviados
 (5, 11, 0.00,   0.00),    -- Rede - Pacotes Recebidos
 (5, 12, 70.00,  85.00),   -- Temperatura da CPU
-(5, 13, 300.00, 500.00);  -- Processos Ativos
+(5, 13, 300.00, 500.00),  -- Processos Ativos
+
+-- Adicionais para predição (apenas os usados no script R)
+(5, 14, NULL,   NULL),    -- RAM - Livre
+(5, 15, NULL,   NULL),    -- Troca de Contexto da CPU
+(5, 16, NULL,   NULL),    -- Interrupções da CPU
+(5, 17, NULL,   NULL),    -- Chamadas de Sistema
+(5, 18, NULL,   NULL);    -- Disco - Operações de Escrita
  
 -- ------------------------------------------------------------
 -- VISUALIZACAO -> (fkUsuario, fkServidor, dataInicioAcesso, dataFimAcesso)
