@@ -1,0 +1,38 @@
+name: montech
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: montech-mysql
+    container_name: montech-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?defina MYSQL_ROOT_PASSWORD no .env}
+      MYSQL_USER: ${MYSQL_USER:-montech}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?defina MYSQL_PASSWORD no .env}
+    ports:
+      - "${MYSQL_PORT:-3306}:3306"
+    volumes:
+      - montech_data:/var/lib/mysql
+    networks:
+      montech-net:
+        aliases:
+          - mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+
+volumes:
+  montech_data:
+    name: montech_data
+
+networks:
+  montech-net:
+    # Nome fixo (sem prefixo do projeto) para outros containers entrarem nela
+    name: montech-net
+    driver: bridge

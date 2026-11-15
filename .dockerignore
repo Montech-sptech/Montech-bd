@@ -1,0 +1,26 @@
+# Só o montech.sql e o Dockerfile precisam entrar no build
+.git
+.gitignore
+.github
+.vscode
+.idea
+
+# Segredos e configs locais
+.env
+.env.*
+!.env.example
+
+# Arquivos do próprio Docker / docs
+docker-compose*.yml
+.dockerignore
+README*
+*.md
+
+# Lixo comum
+*.log
+*.bak
+*.tmp
+.DS_Store
+venv/
+__pycache__/
+node_modules/
