@@ -304,14 +304,7 @@ INSERT INTO servidorcomponente (fkServidor, fkComponente, limiteAtencao, limiteC
 (5, 10, 0.00,   0.00),    -- Rede - Pacotes Enviados
 (5, 11, 0.00,   0.00),    -- Rede - Pacotes Recebidos
 (5, 12, 70.00,  85.00),   -- Temperatura da CPU
-(5, 13, 300.00, 500.00),  -- Processos Ativos
-
--- Adicionais para predição (apenas os usados no script R)
-(5, 14, NULL,   NULL),    -- RAM - Livre
-(5, 15, NULL,   NULL),    -- Troca de Contexto da CPU
-(5, 16, NULL,   NULL),    -- Interrupções da CPU
-(5, 17, NULL,   NULL),    -- Chamadas de Sistema
-(5, 18, NULL,   NULL);    -- Disco - Operações de Escrita
+(5, 13, 300.00, 500.00);  -- Processos Ativos
  
 -- ------------------------------------------------------------
 -- VISUALIZACAO -> (fkUsuario, fkServidor, dataInicioAcesso, dataFimAcesso)
