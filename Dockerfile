@@ -1,4 +1,4 @@
-FROM mysql:$8.0
+FROM mysql:8.0.0
 
 ENV MYSQL_DATABASE=montech
 ENV TZ=America/Sao_Paulo
